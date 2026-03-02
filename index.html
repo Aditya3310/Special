@@ -70,18 +70,19 @@ input[type="password"]{margin-top:20px;padding:12px 15px;border-radius:10px;bord
   <div class="card">
     <h1>Enter Vault Password 🔒</h1>
     <div class="subtitle">Only those with the secret can proceed.</div>
-      <div class="subtitle"> Clue:- The Day Aditya Confessed You </div>
-      <div class="subtitle"><b> Format- [DDMMYYYY]</b> </div>
-    <input type="password" id="vaultPassword" placeholder="Enter password">
-    <button onclick="checkPassword()">Unlock</button>
+    <div class="subtitle"> The Day Aditya Proposed You</div>
+    <div class="subtitle"><b> Format- [DDMMYYYY] </b></div>
+    <input type="password" id="vaultPassword" placeholder="Enter password" style="margin-top:20px; padding:12px 15px; border-radius:10px; border:none; width:70%; font-size:1rem;">
+    <br>
+    <button onclick="checkPassword()" style="margin-top:20px;">Unlock</button>
+    <button id="showPasswordBtn" onclick="showPassword()" style="margin-top:10px; background:linear-gradient(45deg,#4fc3ff,#2979ff); display:none;">Show Password</button>
     <div id="vaultMessage" style="color:red; margin-top:10px;"></div>
   </div>
 </div>
-
 <!-- PAGE 3 -->
 <div class="page hidden" id="page3">
   <div class="card">
-    <h1>Happy Birthday</h1>
+    <h1>Happy Birthday, Manya</h1>
     <div class="subtitle">
       Today isn’t just a date on the calendar.<br>
       It’s the day someone truly special was born. ✨<br><br>
@@ -155,6 +156,11 @@ function checkPassword(){
   }
 }
 
+function showPassword(){
+  const correctPassword = "11012026"; // same as your vault password
+  alert("Hint: The password is: " + correctPassword);
+}
+
 // Page navigation
 function nextPage(current){
   // If moving from page2, show vault page instead of page3
@@ -167,6 +173,36 @@ function nextPage(current){
   document.getElementById("page"+current).classList.add("hidden");
   if(document.getElementById("page"+next)){
     document.getElementById("page"+next).classList.remove("hidden");
+  }
+}
+
+let triedOnce = false; // tracks if user tried unlocking
+
+function checkPassword(){
+  const passwordInput = document.getElementById("vaultPassword").value;
+  const vaultMessage = document.getElementById("vaultMessage");
+  const showBtn = document.getElementById("showPasswordBtn");
+  const correctPassword = "11012026"; // your vault password
+
+  if(passwordInput === correctPassword){
+    // correct! go to page3
+    document.getElementById("vaultPage").classList.add("hidden");
+    document.getElementById("page3").classList.remove("hidden");
+  } else {
+    vaultMessage.innerText = "Incorrect password! Try again.";
+    if(!triedOnce){
+      triedOnce = true; // first wrong attempt
+      showBtn.style.display = "inline-block"; // reveal the Show Password button
+    }
+  }
+}
+
+function showPassword(){
+  if(!triedOnce){
+    alert("Try entering the password first!");
+  } else {
+    const correctPassword = "11012026";
+    alert("Hint: The password is: " + correctPassword);
   }
 }
 
