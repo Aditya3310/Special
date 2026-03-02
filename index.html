@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{height:100vh;overflow:hidden;font-family:'Poppins',sans-serif;background: linear-gradient(135deg,#ffd6e8,#ffc2dc,#ffb3d7);display:flex;justify-content:center;align-items:center;}
+.blob{position:absolute;width:300px;height:300px;background:rgba(255,255,255,0.25);border-radius:50%;filter:blur(80px);animation:float 12s infinite alternate ease-in-out;}
+@keyframes float{from{transform:translate(0,0);}to{transform:translate(80px,60px);}}
+.page{position:absolute;width:100%;height:100%;display:flex;justify-content:center;align-items:center;transition:opacity 0.8s ease, transform 0.8s ease;}
+.hidden{opacity:0;pointer-events:none;transform:scale(0.95);}
+.card{width:90%;max-width:650px;padding:60px 45px;border-radius:30px;background:rgba(255,255,255,0.35);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);box-shadow:0 30px 60px rgba(0,0,0,0.15);text-align:center;color:#4a3b44;animation:fadeUp 1s ease;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
+h1{font-family:'Playfair Display',serif;font-size:2.4rem;margin-bottom:20px;color:#7a3e57;}
+.subtitle{font-size:1.05rem;line-height:1.9;font-weight:400;}
+button{margin-top:40px;padding:12px 40px;border:none;border-radius:50px;background:linear-gradient(45deg,#ff7eb3,#ff4f93);color:white;font-weight:600;cursor:pointer;transition:0.3s;box-shadow:0 10px 25px rgba(255,79,147,0.4);}
+button:hover{transform:translateY(-4px);box-shadow:0 15px 30px rgba(255,79,147,0.6);}
+@media(max-width:480px){h1{font-size:1.9rem;}.card{padding:40px 25px;}}
+.heart {position: absolute;font-size: 18px;opacity: 0.7;animation: floatUp linear forwards;pointer-events: none;}
+@keyframes floatUp {0% {transform: translateY(0) scale(1);opacity: 0.8;}100% {transform: translateY(-110vh) scale(1.4);opacity: 0;}}
+.sparkle {position: absolute;width: 6px;height: 6px;background: white;border-radius: 50%;opacity: 0.6;animation: sparkleFloat linear forwards;pointer-events: none;}
+@keyframes sparkleFloat {0% {transform: translateY(0);opacity: 0.6;}100% {transform: translateY(-100vh);opacity: 0;}}
+input[type="password"]{margin-top:20px;padding:12px 15px;border-radius:10px;border:none;font-size:1rem;width:70%;}
+</style>
+</head>
+
+<body>
+<audio id="bgMusic" loop>
+  <source src="terenaina.mp3" type="audio/mpeg">
+</audio>
+
+<div class="blob" style="top:10%; left:15%;"></div>
+<div class="blob" style="bottom:10%; right:10%;"></div>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <div class="card">
+    <h1>Ooooh… It’s your birthday?</h1>
+    <div class="subtitle">
+      The world feels a little brighter today.<br>
+      A little softer. A little happier.<br><br>
+      I wonder why ✨
+    </div>
+    <button onclick="nextPage(1)">Continue</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="page2">
+  <div class="card">
+    <h1>Are You Sure?</h1>
+    <div class="subtitle">
+      Because today feels different.<br>
+      The air feels lighter.<br>
+      The world feels a little more beautiful.<br><br>
+      I have a feeling…<br>
+      someone very special was born today. ✨
+    </div>
+    <button onclick="nextPage(2)">Continue</button>
+  </div>
+</div>
+
+<!-- VAULT PAGE -->
+<div class="page hidden" id="vaultPage">
+  <div class="card">
+    <h1>Enter Vault Password 🔒</h1>
+    <div class="subtitle">Only those with the secret can proceed.</div>
+      <div class="subtitle"> Clue:- The Day Aditya Confessed You </div>
+      <div class="subtitle"><b> Format- [DDMMYYYY]</b> </div>
+    <input type="password" id="vaultPassword" placeholder="Enter password">
+    <button onclick="checkPassword()">Unlock</button>
+    <div id="vaultMessage" style="color:red; margin-top:10px;"></div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page hidden" id="page3">
+  <div class="card">
+    <h1>Happy Birthday</h1>
+    <div class="subtitle">
+      Today isn’t just a date on the calendar.<br>
+      It’s the day someone truly special was born. ✨<br><br>
+      May your smile stay bright,<br>
+      your heart stay light,<br>
+      and your dreams grow bigger than ever. 💖<br><br>
+      You deserve happiness that feels endless,<br>
+      laughter that feels effortless,<br>
+      and a year that feels unforgettable.<br><br>
+      Happy Birthday 🎂✨
+    </div>
+    <button onclick="nextPage(3)">One More Thing</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page hidden" id="page4">
+  <div class="card">
+    <h1>For You</h1>
+    <div class="subtitle">
+      For You, On Your Birthday<br>
+      Today feels brighter than before,<br>
+      Like the world is quietly smiling.<br>
+      Maybe it’s because it remembers<br>
+      The day you were born.<br><br>
+      You have this gentle light about you,<br>
+      The kind that makes everything better.<br>
+      And I hope this year gives you<br>
+      All the happiness you deserve.<br><br>
+      Happy Birthday ✨🌸
+    </div>
+    <button onclick="nextPage(4)">Last Page</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page hidden" id="page5">
+  <div class="card">
+    <h1>One Last Thing</h1>
+    <div class="subtitle">
+      If I’ve ever said anything that hurt you,<br>
+      I’m truly sorry.<br><br>
+      I’m not very good at wishing people ,<br>
+      I Was Leaning To Make A Website,<br>
+      So I Thought It Would Be Good To Wish You like This<br><br>
+      I Didn't Have Any Of Your Photos,<br>
+      And I Didn't Feel Wright To Just Use Any From The Highlights, Without Your Permission,<br>
+      So I Didn't add Any Of The Photos Here <br><br>
+      And If This Feels Childish Of Me To Wish Like This,<br>
+      Then, I am Sorry For That Too,<br><br>
+    </div>
+  </div>
+</div>
+
+<script>
+const music = document.getElementById("bgMusic");
+if(music) music.volume = 0.25;
+document.addEventListener("pointerdown", ()=>{music.play().catch(()=>{});}, {once:true});
+
+// Vault password check
+function checkPassword(){
+  const passwordInput = document.getElementById("vaultPassword").value;
+  const vaultMessage = document.getElementById("vaultMessage");
+  const correctPassword = "11012026"; // change as needed
+
+  if(passwordInput === correctPassword){
+    document.getElementById("vaultPage").classList.add("hidden");
+    document.getElementById("page3").classList.remove("hidden"); // Go directly to page 3
+  } else {
+    vaultMessage.innerText = "Incorrect password! Try again.";
+  }
+}
+
+// Page navigation
+function nextPage(current){
+  // If moving from page2, show vault page instead of page3
+  if(current === 2){
+    document.getElementById("page2").classList.add("hidden");
+    document.getElementById("vaultPage").classList.remove("hidden");
+    return;
+  }
+  const next = current + 1;
+  document.getElementById("page"+current).classList.add("hidden");
+  if(document.getElementById("page"+next)){
+    document.getElementById("page"+next).classList.remove("hidden");
+  }
+}
+
+// Show only page1 on load
+window.onload = function(){
+  document.querySelectorAll(".page").forEach(p=>{
+    if(p.id!=="page1") p.classList.add("hidden");
+    else p.classList.remove("hidden");
+  });
+};
+
+// Floating Hearts
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💗";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*4+6)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),10000);
+},1200);
+
+// Sparkles
+setInterval(()=>{
+  const sparkle = document.createElement("div");
+  sparkle.className="sparkle";
+  sparkle.style.left=Math.random()*100+"vw";
+  sparkle.style.animationDuration=(Math.random()*3+5)+"s";
+  document.body.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),8000);
+},900);
+</script>
+</body>
+</html>
